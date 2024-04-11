@@ -1,0 +1,64 @@
+version: '3'
+
+services:
+
+  web:
+    build: .
+    image: my-app:v1
+    environment:
+      - DB_HOST=db
+      - DB_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "8080:8080"
+    volumes:
+      - web-data:/app/data
+    networks:
+      - frontend
+    depends_on:
+      - db
+    restart: always
+    deploy:
+      replicas: 3
+      update_config:
+        parallelism: 2
+        order: rolling-update
+      placement:
+        constraints:
+          - node.role == manager
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  db:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - backend
+    secrets:
+      - source: db-password
+        target: MYSQL_ROOT_PASSWORD
+
+  redis:
+    image: redis:6.0
+    volumes:
+      - redis-data:/data
+    networks:
+      - backend
+
+volumes:
+  web-data:
+  db-data:
+  redis-data:
+
+networks:
+  frontend:
+  backend:
+
+secrets:
+  db-password:
+    file: db-password.txt
