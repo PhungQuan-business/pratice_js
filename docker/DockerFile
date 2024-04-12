@@ -4,22 +4,10 @@
 # docker build + Dockerfile để tạo image
 # docker run để tạo container
 
-# File này đã bị move sang folder mới nên cần sửa lại đường dẫn
-
-
-FROM ubuntu:lastest
-
-#choose directory inside container to store code
+FROM python:3.9
 WORKDIR /app
-
-# copy toàn bộ cấu trúc code vào thư  mục app
-# RUN mkdir DTU_code && cd DTU_code
-
-COPY ./requirements.txt  /app/
-RUN pip install -r requirements.txt
-
-# copy all files from local to container directory
-COPY . /app/
-
-# CMD ["python3", "-m", 'flask', 'run', '--host=0.0.0.0']
-CMD ["python3", "flask_api.py"]
+COPY ../requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY ../ .
+EXPOSE 5000
+CMD ["python", "app.py"]
