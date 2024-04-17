@@ -3,20 +3,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: RS-deployment
+  name: rs-deployment
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: RS-app
+      app: rs-app
   template:
     metadata:
       labels:
-        app: RS-app
+        app: rs-app
     spec:
       containers:
-      - name: RS-app-container
+      - name: rs-app-container
         # tìm cách pass built image vào trong này
-        image: RS-image:v1
+        image: rs-image:latest
         ports:
         - containerPort: 5000

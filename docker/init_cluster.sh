@@ -4,7 +4,7 @@
 minikube start --nodes=1
 
 # Build Docker image
-docker build -t my-python-app:latest .
+# docker build -t my-python-app:latest .
 
 # Apply Kubernetes Deployment
 kubectl apply -f deployment.yaml
@@ -13,11 +13,11 @@ kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
 
 # Check status of Deployment and Pods
-kubectl get deployment myapp-deployment
+kubectl get deployment RS-deployment
 kubectl get pods
 
 # Check status of Service
-kubectl get service myapp-service
+kubectl get service RS-service
 
 # Open the application in default browser (Minikube)
-minikube service myapp-service
+minikube service RS-service

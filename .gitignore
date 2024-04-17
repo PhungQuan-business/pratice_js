@@ -1,11 +1,8 @@
-../batch_processing.py
-../batch_processing.json
-../fake_request_generator.js
-../pratice_callback.js
-../README.md
-node_modules
-package-lock.json
-package.json
-./docker/node_modules/
+batch_processing.*
+/fake_request_generator.js
+/pratice_callback.js
+/fake_request_generator.js
+/generate_request.py
+pratice_callback.js
 
 
