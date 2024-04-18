@@ -5,7 +5,7 @@ kind: Deployment
 metadata:
   name: rs-deployment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: rs-app
@@ -16,7 +16,12 @@ spec:
     spec:
       containers:
       - name: rs-app-container
-        # tìm cách pass built image vào trong này
-        image: rs-image:latest
+        # tìm cách pass t image vào trong này
+        image: docker.io/library/rs-image-new
+        imagePullPolicy: IfNotPresent
+        # image: busybox
+        # command: ["sleep", "infinity"] # keep the container running 
         ports:
         - containerPort: 5000
+      imagePullSecrets:
+        - name: regcred

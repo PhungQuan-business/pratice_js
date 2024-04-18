@@ -4,5 +4,8 @@ batch_processing.*
 /fake_request_generator.js
 /generate_request.py
 pratice_callback.js
+# .gitignore file work normally for files start from here
+general_note.txt
+rs-image-new.tar
 
 

@@ -11,5 +11,5 @@ spec:
       targetPort: 5000
   type: NodePort
   selector:
-    app: RS-app
+    app: rs-app
   
